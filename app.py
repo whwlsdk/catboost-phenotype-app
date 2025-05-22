@@ -18,10 +18,13 @@ MODEL_PATHS = {
 def load_models():
     models = {}
     for trait, path in MODEL_PATHS.items():
+        st.write(f"🔍 모델 파일 존재 여부 확인: {path} → {os.path.exists(path)}")
         if os.path.exists(path):
             model = CatBoostRegressor()
             model.load_model(path)
             models[trait] = model
+        else:
+            st.warning(f" 모델 파일 없음: {path}")
     return models
 
 st.title("🍅 토마토 유전형 기반 표현형 예측기")
@@ -41,6 +44,7 @@ if uploaded_file:
         st.stop()
 
     models = load_models()
+    st.write("📦 모델 로드 상태:", list(models.keys()))
     all_predictions = {}
     shap_values_dict = {}
 
