@@ -73,32 +73,11 @@ if uploaded_file:
 
     with tab2:
         st.subheader("🧬 SHAP Feature 영향도 (상위 20개)")
-    
-        # 🔍 디버깅용: 현재 모델 키 확인
-        st.write("✅ 현재 모델 목록 (models.keys()):", list(models.keys()))
-
         selected_trait = st.selectbox("🔎 표현형 선택", list(models.keys()))
-
-        # ✅ selected_trait 유효성 검증
-        if selected_trait not in models:
-            st.error(f"❌ 선택한 표현형 '{selected_trait}' 이(가) 모델 목록에 없습니다.")
-        
-            # 🔍 디버깅: 문자열 일치 비교
-            st.write("🔎 선택된 표현형:", repr(selected_trait))
-            st.write("🔎 모델 키 목록:", [repr(k) for k in models.keys()])
-
-            for k in models.keys():
-                if selected_trait.strip() == k.strip():
-                    st.warning(f"⚠️ strip 일치: '{k}'")
-                if selected_trait.replace(" ", "") == k.replace(" ", ""):
-                    st.warning(f"⚠️ 공백 제거 일치: '{k}'")
-        
-            st.stop()
-
-        # ✅ 모델 선택 및 SHAP 계산
         model = models[selected_trait]
         X = geno_df[model.feature_names_]
 
+        # SHAP 계산
         shap_values = model.get_feature_importance(Pool(X), type="ShapValues")
         shap_values = shap_values[:, :-1]  # 마지막 열은 bias term
         mean_abs_shap = np.abs(shap_values).mean(axis=0)
@@ -110,4 +89,3 @@ if uploaded_file:
         ax.barh(top_features[::-1], top_shap[::-1])
         ax.set_title(f"{selected_trait} - SHAP Top 20 Features")
         st.pyplot(fig)
-
