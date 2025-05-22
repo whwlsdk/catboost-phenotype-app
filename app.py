@@ -18,7 +18,6 @@ MODEL_PATHS = {
 def load_models():
     models = {}
     for trait, path in MODEL_PATHS.items():
-        st.write(f"🔍 모델 파일 존재 여부 확인: {path} → {os.path.exists(path)}")
         if os.path.exists(path):
             model = CatBoostRegressor()
             model.load_model(path)
@@ -44,7 +43,6 @@ if uploaded_file:
         st.stop()
 
     models = load_models()
-    st.write("📦 모델 로드 상태:", list(models.keys()))
     all_predictions = {}
     shap_values_dict = {}
 
