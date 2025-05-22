@@ -73,6 +73,10 @@ if uploaded_file:
 
     with tab2:
         st.subheader("🧬 SHAP Feature 영향도 (상위 20개)")
+        
+        # 🔍 디버깅용: 현재 모델 키 확인
+        st.write("✅ 현재 모델 목록 (models.keys()):", list(models.keys()))
+
         selected_trait = st.selectbox("🔎 표현형 선택", list(models.keys()))
         model = models[selected_trait]
         X = geno_df[model.feature_names_]
