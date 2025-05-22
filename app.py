@@ -6,12 +6,12 @@ import os
 import numpy as np
 
 MODEL_PATHS = {
-    "과중 (g)": "과중 (g)_catboost_model.cbm",
-    "과장 (mm)": "과장 (mm)_catboost_model.cbm",
-    "과폭 (mm)": "과폭 (mm)_catboost_model.cbm",
-    "과피두께 (mm)": "과피두께 (mm)_catboost_model.cbm",
-    "과실경도 (kg)": "과실경도 (kg)_catboost_model.cbm",
-    "당도 (%)": "당도 (%)_catboost_model.cbm"
+    "과중 (g)": "saved_models/과중 (g)_catboost_model.cbm",
+    "과장 (mm)": "saved_models/과장 (mm)_catboost_model.cbm",
+    "과폭 (mm)": "saved_models/과폭 (mm)_catboost_model.cbm",
+    "과피두께 (mm)": "saved_models/과피두께 (mm)_catboost_model.cbm",
+    "과실경도 (kg)": "saved_models/과실경도 (kg)_catboost_model.cbm",
+    "당도 (%)": "saved_models/당도 (%)_catboost_model.cbm"
 }
 
 @st.cache_resource
